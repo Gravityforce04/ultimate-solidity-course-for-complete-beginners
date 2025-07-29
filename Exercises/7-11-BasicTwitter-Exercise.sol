@@ -15,4 +15,8 @@ contract Twitter {
     function createTweet(string memory _tweet) public { //storge _tweet in tem memory
         tweets[msg.sender] = _tweet; //msg.sender : from blockchain, user adds/metadata store in msg(object), sender: wallet address
     }
+
+    function getTweet(address _owner) public view returns (string memory) {
+        return tweets[_owner];
+    }
 }
