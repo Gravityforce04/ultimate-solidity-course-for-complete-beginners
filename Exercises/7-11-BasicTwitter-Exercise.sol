@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.30;
 
 // 1️⃣ Create a Twitter Contract 
 // 2️⃣ Create a mapping between user and tweet 
@@ -10,5 +10,9 @@ pragma solidity ^0.8.0;
 
 contract Twitter {
 
+    mapping(address => string ) public tweets; //
 
+    function createTweet(string memory _tweet) public { //storge _tweet in tem memory
+        tweets[msg.sender] = _tweet; //msg.sender : from blockchain, user adds/metadata store in msg(object), sender: wallet address
+    }
 }
