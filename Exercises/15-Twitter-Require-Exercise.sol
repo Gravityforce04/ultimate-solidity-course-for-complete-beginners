@@ -7,6 +7,8 @@ pragma solidity ^0.8.0;
 
 contract Twitter {
 
+    uint constant MAX_TWEET_WORD = 280;
+
     struct Tweet {
         address author;
         string content;
@@ -20,6 +22,7 @@ contract Twitter {
     function createTweet(string memory _tweet) public {
         // conditional
         // if tweet length <= 280 then we are good, otherwise we revert
+        require(bytes(_tweet).length < MAX_TWEET_WORD, "Word count exceed limit of 280");
         
 
         Tweet memory newTweet = Tweet({
