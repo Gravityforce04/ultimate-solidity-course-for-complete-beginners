@@ -10,13 +10,18 @@ pragma solidity ^0.8.30;
 
 contract Twitter {
 
-    mapping(address => string ) public tweets; //
+    mapping(address => string []) public tweets; 
 
     function createTweet(string memory _tweet) public { //storge _tweet in tem memory
-        tweets[msg.sender] = _tweet; //msg.sender : from blockchain, user adds/metadata store in msg(object), sender: wallet address
+        tweets[msg.sender].push (_tweet); //msg.sender from blockchain, user adds/metadata store in msg(object), sender: wallet address
     }
 
-    function getTweet(address _owner) public view returns (string memory) {
-        return tweets[_owner];
+    function getTweet(address _owner, uint _i) public view returns (string memory) {
+        return tweets[_owner] [_i];
     }
+
+    function getAllTweets(address _owner) public view returns (string[] memory) {
+        return tweets[_owner]; //return all value in string[] array
+            }
+
 }
