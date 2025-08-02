@@ -12,6 +12,8 @@ contract EventExample {
         string username;
         uint256 age;
     }
+
+    event NewUserRegister(address indexed user, string username);
     
     mapping(address => User) public users;
     
@@ -22,6 +24,6 @@ contract EventExample {
         
         // 2️⃣ Emit the event with msg.sender and username as the inputs
         // CODE HERE 👇
-
+        emit NewUserRegister(msg.sender, _username);
     }
 }
