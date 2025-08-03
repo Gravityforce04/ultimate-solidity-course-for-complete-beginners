@@ -18,5 +18,12 @@ contract User {
         require(players[userAddress].playerAddress == address(0), "User already exists");
 
         // Create a new player here 👇
+        Player memory newPlayer = Player({
+            playerAddress: userAddress, //if use msg.sender will become Game contract
+            username: username,
+            score: 0
+        });
+
+        players[userAddress] = newPlayer;
     }
 }

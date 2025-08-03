@@ -15,6 +15,7 @@ contract Profile {
 
     function setProfile(string memory _displayName, string memory _bio) public {
         // CODE HERE 👇
+        profiles[msg.sender]= UserProfile(_displayName,_bio);
 
     }
 

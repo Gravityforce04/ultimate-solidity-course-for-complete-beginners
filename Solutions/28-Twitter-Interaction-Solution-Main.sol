@@ -26,7 +26,11 @@ interface IProfile {
 contract Twitter is Ownable {
 
     uint16 public MAX_TWEET_LENGTH = 280;
-
+    constructor() Ownable(msg.sender) {
+        // your contract's constructor logi
+        profileContract = IProfile(msg.sender);
+    }
+    
     struct Tweet {
         uint256 id;
         address author;
@@ -49,9 +53,9 @@ contract Twitter is Ownable {
         _;
     }
 
-    constructor(address _profileContract) {
-        profileContract = IProfile(_profileContract);
-    }
+    // constructor(address _profileContract) {
+    //     profileContract = IProfile(_profileContract);
+    // }
 
     function changeTweetLength(uint16 newTweetLength) public onlyOwner {
         MAX_TWEET_LENGTH = newTweetLength;
