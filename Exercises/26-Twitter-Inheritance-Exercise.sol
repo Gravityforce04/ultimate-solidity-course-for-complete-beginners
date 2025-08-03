@@ -3,10 +3,15 @@
 // 1️⃣ Import Ownable.sol contract from OpenZeppelin
 // 2️⃣ Inherit Ownable Contract
 // 3️⃣ Replace current onlyOwner 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 
 pragma solidity ^0.8.0;
 
-contract Twitter {
+contract Twitter is Ownable {
+    constructor() Ownable(msg.sender) {
+        // your contract's constructor logi
+    }
 
     uint16 public MAX_TWEET_LENGTH = 280;
 
@@ -18,21 +23,11 @@ contract Twitter {
         uint256 likes;
     }
     mapping(address => Tweet[] ) public tweets;
-    address public owner;
 
     // Define the events
     event TweetCreated(uint256 id, address author, string content, uint256 timestamp);
     event TweetLiked(address liker, address tweetAuthor, uint256 tweetId, uint256 newLikeCount);
     event TweetUnliked(address unliker, address tweetAuthor, uint256 tweetId, uint256 newLikeCount);
-
-    constructor() {
-        owner = msg.sender;
-    }
-
-    modifier onlyOwner() {
-        require(msg.sender == owner, "YOU ARE NOT THE OWNER!");
-        _;
-    }
 
     function changeTweetLength(uint16 newTweetLength) public onlyOwner {
         MAX_TWEET_LENGTH = newTweetLength;
